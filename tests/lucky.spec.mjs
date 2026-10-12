@@ -1,0 +1,24 @@
+/* SPDX-License-Identifier: Apache-2.0
+Copyright 2026 TipsY14 */
+import {test,expect} from '@playwright/test';
+import fs from 'node:fs/promises';
+for(const width of [1432,768,390])for(const theme of ['light','dark'])test(`lucky native tool layout ${width} ${theme}`,async({page})=>{
+ await page.addInitScript(t=>localStorage.setItem('nsu.settings',JSON.stringify({theme:t,palette:'mist'})),theme);
+ await page.route('**/lucky',async r=>r.fulfill({contentType:'text/html',body:await fs.readFile('tests/fixtures/lucky.html','utf8')}));
+ await page.setViewportSize({width,height:815});await page.goto('/lucky');await expect(page.locator('html')).toHaveAttribute('data-nsu-lucky','true');
+ const header=page.locator('.sample-panel > header'),form=page.locator('.sample-panel > form');await expect(header).toHaveCSS('position','static');await expect(form).toHaveCSS('position','static');expect((await form.boundingBox()).y).toBeGreaterThanOrEqual((await header.boundingBox()).y+(await header.boundingBox()).height-1);
+ await expect(page.getByRole('link',{name:'主页',exact:true})).toHaveAttribute('href','/');await expect(page.getByRole('link',{name:'原理',exact:true})).toHaveAttribute('href','#how');
+ const inputs=page.locator('.pure-g input');const dims=await inputs.evaluateAll(nodes=>nodes.map(n=>({height:n.getBoundingClientRect().height,y:n.getBoundingClientRect().y})));for(const d of dims)expect(d.height).toBe(38);if(width===1432)expect(Math.max(...dims.map(d=>d.y))-Math.min(...dims.map(d=>d.y))).toBeLessThan(1);
+ const button=page.getByRole('button',{name:'生成链接',exact:true});await button.hover();const pair=await button.evaluate(n=>({fg:getComputedStyle(n).color,bg:getComputedStyle(n).backgroundColor,image:getComputedStyle(n).backgroundImage}));expect(pair.fg).not.toBe(pair.bg);expect(pair.image).toBe('none');await page.locator('#post-id').focus();await expect(page.locator('#post-id')).toHaveCSS('box-shadow','none');await expect(page.locator('#post-id')).toHaveValue('100');await expect(page.locator('#remove-duplicated')).toBeChecked();
+ await page.evaluate(()=>{
+  const result=document.querySelector('#fixture-result');result.innerHTML='<div class="not-revealed">未到开奖时间</div><div class="board"><div class="head-info">测试结果状态</div><div style="padding:0 20px 20px"><h1>中奖名单</h1><div class="rank-row"><div class="draw-number">1</div><img class="avatar" src="/tests/fixtures/avatar.svg" alt=""><div class="member-name"><a href="/space/101" style="color:#ccc">'+ '很长的测试用户名'.repeat(8)+'</a><span>（不符合条件）</span></div><div class="coins">100楼</div></div></div></div>';
+  const textarea=document.createElement('textarea');textarea.className='pure-u-23-24 pure-u-md-1-2 add-margin';textarea.placeholder='T楼链接';textarea.value='https://www.nodeseek.com/lucky?'+ 'param=long&'.repeat(60);document.querySelector('fieldset').append(textarea);
+  document.querySelector('#gift-count').disabled=true;
+  const popup=document.createElement('div');popup.className='mx-datepicker-main';popup.innerHTML='<div class="mx-calendar"><div class="mx-calendar-header"><button class="mx-btn" type="button">日期</button></div><div class="mx-calendar-content"><table class="mx-table"><tbody><tr><td class="cell active">8</td><td class="cell disabled">7</td></tr></tbody></table></div></div><div class="mx-time"><div class="mx-time-item active">12:00</div></div>';document.body.append(popup);
+ });
+ await expect(page.locator('#gift-count')).toBeDisabled();await expect(page.locator('#gift-count')).toHaveValue('2');await expect(page.locator('.not-revealed')).toBeVisible();
+ const surface=await form.evaluate(n=>getComputedStyle(n).backgroundColor);await expect(page.locator('.board')).toHaveCSS('background-color',surface);await expect(page.locator('.mx-datepicker-main')).toHaveCSS('background-color',surface);await expect(page.locator('.mx-time')).toHaveCSS('background-color',surface);
+ expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);expect(await page.locator('.board').evaluate(n=>n.scrollWidth<=n.clientWidth+1)).toBe(true);expect(await form.evaluate(n=>n.scrollWidth<=n.clientWidth+1)).toBe(true);
+ expect(await page.evaluate(()=>window.originalLuckyInput===document.querySelector('#post-id')&&window.originalLuckyHeader===document.querySelector('header')&&window.originalLuckyButton===document.querySelector('.sample-panel button'))).toBe(true);expect(await page.evaluate(()=>[window.luckySubmits,window.luckyChanges])).toEqual([0,0]);
+ await page.evaluate(()=>window.__SEEKFLOW__.destroy());await expect(page.locator('html')).not.toHaveAttribute('data-nsu-lucky');await expect(header).toHaveCSS('height','200px');await expect(form).toHaveCSS('top','-50px');await expect(form).toHaveCSS('background-color','rgb(255, 255, 255)');await expect(page.locator('#post-id')).toHaveValue('100');
+});

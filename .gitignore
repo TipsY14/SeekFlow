@@ -1,0 +1,11 @@
+node_modules/
+test-results/
+playwright-report/
+dist/
+artifacts/
+.trellis/
+.pi/
+.env
+.env.*
+*.local
+scripts/live-bridge.mjs

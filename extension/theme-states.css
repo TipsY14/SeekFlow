@@ -1,0 +1,81 @@
+/* SPDX-License-Identifier: Apache-2.0
+Copyright 2026 TipsY14 */
+/* Native colors follow the extension theme even when body.dark-layout disagrees.
+   No native state, SVG geometry, draft, permission or event handler is changed. */
+html[data-nsu-enabled] body {
+ --body-bg:var(--nsu-bg)!important; --bg-main-color:var(--nsu-surface)!important; --bg-sub-color:var(--nsu-subtle)!important;
+ --text-color:var(--nsu-text)!important; --gray-color:var(--nsu-muted)!important; --fade-color:var(--nsu-muted)!important;
+ --link-color:var(--nsu-accent)!important; --link-hover-color:var(--nsu-accent)!important;
+ --main-color:var(--nsu-accent)!important; --sub-color:var(--nsu-accent)!important; --dark-color:var(--nsu-text)!important;
+ --glass-color:var(--nsu-surface)!important; --tabs-bg:var(--nsu-subtle)!important;
+ --tab-hover-bg:var(--nsu-hover)!important; --tab-active-bg:var(--nsu-accent-soft)!important;
+ --nsu-error:#b42332; --nsu-warning:#914c0c; --nsu-success:#216443;
+}
+html[data-nsu-enabled][data-nsu-theme="dark"] body { --nsu-error:#ffadb4; --nsu-warning:#f3c984; --nsu-success:#abe0c0; }
+/* The native hover used --link-hover-color (near-white) on a pale card. */
+html[data-nsu-enabled] body .user-head .menu > div > :is(a,span,button):has(svg) { display:inline-flex; align-items:center; justify-content:center; width:26px; height:26px; border-radius:4px; color:var(--nsu-muted)!important; background:transparent!important; }
+html[data-nsu-enabled] body .user-head .menu > div > :is(a,span,button):has(svg):is(:hover,:focus-visible) { color:var(--nsu-accent)!important; background:var(--nsu-hover)!important; }
+html[data-nsu-enabled] body .user-head .menu > div svg { margin:0!important; color:inherit!important; }
+html[data-nsu-enabled] body .user-head .menu > div svg:hover { color:var(--nsu-accent)!important; }
+/* Neutral controls stay neutral on hover; native .dark-layout .btn:hover must not leak. */
+html[data-nsu-enabled] body :is(.hover-user-card,.nsk-notification) .btn:not(:disabled):not([aria-disabled="true"]):is(:hover,:focus-visible) { color:var(--nsu-text)!important; background:var(--nsu-hover)!important; border-color:var(--nsu-border)!important; }
+html[data-nsu-enabled] body .hover-user-card .closeBtn:is(:hover,:focus-visible) { color:var(--nsu-accent)!important; }
+html[data-nsu-enabled] body :is(.hover-user-card .btn,.nsk-notification .btn,.embed-vote .pure-button,.stardust-panel .pure-button,#user-setting-panel .btn,#user-setting-panel .pure-button,.md-editor .submit,.nsu-button):is(:disabled,[aria-disabled="true"]) { color:var(--nsu-muted)!important; background:var(--nsu-subtle)!important; border-color:var(--nsu-border)!important; opacity:1!important; cursor:not-allowed!important; box-shadow:none!important; }
+html[data-nsu-enabled] body :is(.hover-user-card,.stardust-panel,.msc-confirm) :is(input,textarea,select):disabled { color:var(--nsu-muted)!important; background:var(--nsu-subtle)!important; opacity:1!important; -webkit-text-fill-color:var(--nsu-muted)!important; }
+html[data-nsu-enabled] body #user-setting-panel .selector-right-side :is(input,textarea,select):disabled { color:var(--nsu-muted)!important; background:var(--nsu-subtle)!important; opacity:1!important; -webkit-text-fill-color:var(--nsu-muted)!important; }
+/* Main actions keep their paired foreground and background in every interaction state. */
+html[data-nsu-enabled] body :is(.new-discussion,.md-editor .submit,.embed-vote .pure-button,.stardust-panel .pure-button-primary,.nsu-button-primary):not(:disabled):not([aria-disabled="true"]):is(:hover,:focus-visible,:active) { background:var(--nsu-accent)!important; color:var(--nsu-on-accent)!important; filter:none!important; opacity:1!important; background-image:none!important; }
+html[data-nsu-enabled] body .stardust-panel .pure-button:not(.pure-button-primary):not(:disabled):hover { background:var(--nsu-hover)!important; color:var(--nsu-text)!important; }
+html[data-nsu-enabled] body :is(.nsu-button,.nsu-header-button):not(.nsu-button-primary):not([aria-pressed="true"]):not(:disabled):is(:hover,:focus-visible) { color:var(--nsu-text)!important; background:var(--nsu-hover)!important; }
+html[data-nsu-enabled] body .comment-menu .menu-item:hover { background:var(--nsu-hover)!important; color:var(--nsu-accent)!important; }
+html[data-nsu-enabled] body .nsk-pager a:is(:hover,:focus-visible) { background:var(--nsu-hover)!important; color:var(--nsu-accent)!important; }
+/* Native placeholders used half-opacity; selected text/options and edit tools were incomplete. */
+html[data-nsu-enabled] :is(.nsu-input,.nsu-feed-search,.search-box input,.search-overlay input,.md-editor textarea,.nsk-notification textarea)::placeholder { color:var(--nsu-muted)!important; opacity:1!important; }
+html[data-nsu-enabled] :is(.nsu-select,.search-overlay select) option { background:var(--nsu-surface)!important; color:var(--nsu-text)!important; }
+html[data-nsu-enabled] body :is(.md-editor,.nsk-notification .message-input) :is(textarea,.CodeMirror,.CodeMirror-lines) { color:var(--nsu-text)!important; caret-color:var(--nsu-text); }
+html[data-nsu-enabled] body :is(.md-editor,.nsk-notification .message-input) :is(.CodeMirror-linenumber,.mde-toolbar button,.mde-toolbar a,.mde-toolbar svg) { color:var(--nsu-muted)!important; }
+html[data-nsu-enabled] body :is(.md-editor,.nsk-notification .message-input) .mde-toolbar :is(button,a):hover { background:var(--nsu-hover)!important; color:var(--nsu-accent)!important; }
+/* Hard-coded native table/header backgrounds survived palette changes. */
+html[data-nsu-enabled] body .post-content table { background:var(--nsu-surface)!important; color:var(--nsu-text)!important; border-color:var(--nsu-border)!important; }
+html[data-nsu-enabled] body .post-content :is(td,th) { background:transparent!important; color:var(--nsu-text)!important; border-color:var(--nsu-border)!important; }
+html[data-nsu-enabled] body .post-content th { background:var(--nsu-subtle)!important; }
+/* Keep syntax distinction, but choose readable tokens from the active theme, not body classes. */
+html[data-nsu-enabled] body :is(.post-content,.nsu-context-body) .hljs { background:transparent!important; color:var(--nsu-text)!important; }
+html[data-nsu-enabled] body :is(.post-content,.nsu-context-body) :is(.hljs-comment,.hljs-quote) { color:var(--nsu-muted)!important; }
+html[data-nsu-enabled] body :is(.post-content,.nsu-context-body) :is(.hljs-keyword,.hljs-doctag,.hljs-formula,.hljs-section,.hljs-name,.hljs-selector-tag,.hljs-symbol,.hljs-bullet,.hljs-link,.hljs-meta,.hljs-title) { color:var(--nsu-accent)!important; }
+html[data-nsu-enabled] body :is(.post-content,.nsu-context-body) :is(.hljs-string,.hljs-regexp,.hljs-addition,.hljs-attribute,.hljs-literal) { color:var(--nsu-success)!important; }
+html[data-nsu-enabled] body :is(.post-content,.nsu-context-body) :is(.hljs-attr,.hljs-variable,.hljs-template-variable,.hljs-type,.hljs-number,.hljs-built_in) { color:var(--nsu-warning)!important; }
+html[data-nsu-enabled] body :is(.post-content,.nsu-context-body) .hljs-deletion { color:var(--nsu-error)!important; }
+html[data-nsu-enabled] body :is(.md-editor,.nsk-notification .message-input) .CodeMirror :is(.cm-header,.cm-keyword,.cm-def,.cm-variable-2,.cm-link,.cm-url,.cm-tag,.cm-attribute,.cm-builtin) { color:var(--nsu-accent)!important; }
+html[data-nsu-enabled] body :is(.md-editor,.nsk-notification .message-input) .CodeMirror :is(.cm-comment,.cm-meta,.cm-qualifier,.cm-hr) { color:var(--nsu-muted)!important; }
+html[data-nsu-enabled] body :is(.md-editor,.nsk-notification .message-input) .CodeMirror :is(.cm-string,.cm-string-2,.cm-quote) { color:var(--nsu-success)!important; }
+html[data-nsu-enabled] body :is(.md-editor,.nsk-notification .message-input) .CodeMirror :is(.cm-atom,.cm-number,.cm-variable-3,.cm-type,.cm-bracket) { color:var(--nsu-warning)!important; }
+html[data-nsu-enabled] body :is(.md-editor,.nsk-notification .message-input) .CodeMirror :is(.cm-error,.cm-invalidchar) { color:var(--nsu-error)!important; }
+/* Confirmation dialogs keep their native actions and input values. */
+html[data-nsu-enabled] body .msc-overlay { background:rgba(0,0,0,.32)!important; opacity:1!important; }
+html[data-nsu-enabled] body .msc-content { background:var(--nsu-surface)!important; color:var(--nsu-text)!important; border:1px solid var(--nsu-border); border-radius:8px; box-shadow:var(--nsu-shadow); }
+html[data-nsu-enabled] body .msc-confirm :is(.msc-title,.msc-body,.msc-sub) { color:var(--nsu-text)!important; }
+html[data-nsu-enabled] body .msc-confirm .msc-input { background:var(--nsu-subtle)!important; color:var(--nsu-text)!important; border:1px solid var(--nsu-border)!important; border-radius:5px; box-shadow:none!important; }
+html[data-nsu-enabled] body .msc-confirm .msc-input::placeholder { color:var(--nsu-muted)!important; opacity:1; }
+html[data-nsu-enabled] body .msc-confirm .msc-input:focus { border-color:var(--nsu-muted)!important; }
+html[data-nsu-enabled] body .msc-action button { background:var(--nsu-subtle)!important; color:var(--nsu-text)!important; border:1px solid var(--nsu-border)!important; border-radius:5px; box-shadow:none!important; }
+html[data-nsu-enabled] body .msc-action button:not(:disabled):is(:hover,:focus-visible) { background:var(--nsu-hover)!important; color:var(--nsu-text)!important; border-color:var(--nsu-muted)!important; }
+html[data-nsu-enabled] body .msc-confirm .msc-close { color:var(--nsu-muted)!important; }
+html[data-nsu-enabled] body .msc-confirm .msc-close:hover { background:var(--nsu-hover)!important; color:var(--nsu-text)!important; }
+/* Preserve warning/error meaning without the native theme's fixed orange-on-white cards. */
+html[data-nsu-enabled] body .risk-alert { background:var(--nsu-subtle)!important; border-color:var(--nsu-border)!important; color:var(--nsu-warning)!important; box-shadow:none!important; }
+html[data-nsu-enabled] body .post-content .markdown-alert { background:var(--nsu-subtle)!important; color:var(--nsu-text)!important; }
+html[data-nsu-enabled] body .post-content :is(.markdown-alert-note,.markdown-alert-important) { --border-color:var(--nsu-accent)!important; }
+html[data-nsu-enabled] body .post-content .markdown-alert-warning { --border-color:var(--nsu-warning)!important; }
+html[data-nsu-enabled] body .post-content .markdown-alert-caution { --border-color:var(--nsu-error)!important; }
+html[data-nsu-enabled] body .post-content .markdown-alert-tip { --border-color:var(--nsu-success)!important; }
+/* Category hover is a themed tint, never the native hard-coded green/gray or fade-in. */
+html[data-nsu-enabled] body #nsk-left-panel-container .category-list li { opacity:1!important; transition:none!important; background:transparent!important; box-shadow:none!important; }
+html[data-nsu-enabled] body #nsk-left-panel-container .category-list :is(li > a,.nsu-side-link) { color:var(--nsu-muted)!important; background:transparent!important; text-shadow:none!important; box-shadow:none!important; filter:none!important; opacity:1!important; transition:none!important; }
+html[data-nsu-enabled] body #nsk-left-panel-container .category-list :is(li > a,.nsu-side-link):is(:hover,:focus-visible,:active) { color:var(--nsu-accent)!important; background:var(--nsu-hover)!important; }
+html[data-nsu-enabled] body #nsk-left-panel-container .category-list :is(li.current-category > a,a[aria-current="page"],.nsu-side-link[aria-current="page"]) { color:var(--nsu-accent)!important; background:var(--nsu-accent-soft)!important; }
+html[data-nsu-enabled] body #nsk-left-panel-container .category-list :is(li > a,.nsu-side-link) > :is(span,svg) { color:inherit!important; opacity:1!important; text-shadow:none!important; filter:none!important; }
+/* Feed category badges and sorter tabs use the same palette on hover, including dark-layout. */
+html[data-nsu-enabled] body .post-info .post-category:is(:hover,:focus-visible) { background:var(--nsu-accent-soft)!important; color:var(--nsu-accent)!important; text-shadow:none!important; box-shadow:none!important; filter:none!important; }
+html[data-nsu-enabled] body .post-list-controler .sorter a:is(:hover,:focus-visible) { color:var(--nsu-accent)!important; background:var(--nsu-hover)!important; text-shadow:none!important; box-shadow:none!important; }
+html[data-nsu-enabled] body .post-list-controler .sorter a.selected:is(:hover,:focus-visible) { color:var(--nsu-accent)!important; background:var(--nsu-surface)!important; }

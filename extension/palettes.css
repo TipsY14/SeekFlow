@@ -1,0 +1,45 @@
+/* SPDX-License-Identifier: Apache-2.0
+Copyright 2026 TipsY14 */
+/* Role-based color system: neutral canvas/layers, primary interaction accent, paired on-color.
+   Historical IDs preserve stored preferences; labels describe appearance, not artists.
+   --nsu-water and --nsu-petal remain aliases for existing component contracts, not decorative hues. */
+/* 标准 / light */
+html[data-nsu-enabled],html[data-nsu-palette] {
+  --nsu-bg:#f3f4f6; --nsu-surface:#fafafa; --nsu-subtle:#eceff3; --nsu-text:#303640; --nsu-muted:#5c6675; --nsu-border:#d9dfe8; --nsu-accent:#315fa8; --nsu-accent-soft:#e2eafa; --nsu-hover:#eaedf3; --nsu-on-accent:#fafafa; --nsu-water:var(--nsu-subtle); --nsu-petal:var(--nsu-accent-soft); color-scheme:light;
+}
+/* 标准 / dark */
+html[data-nsu-enabled][data-nsu-theme="dark"],html[data-nsu-palette][data-nsu-theme="dark"] {
+  --nsu-bg:#1b1d21; --nsu-surface:#25282e; --nsu-subtle:#2f333b; --nsu-text:#e5e8ee; --nsu-muted:#b3bdcc; --nsu-border:#434a57; --nsu-accent:#a9c2ed; --nsu-accent-soft:#304260; --nsu-hover:#343c49; --nsu-on-accent:#202b3e; --nsu-water:var(--nsu-subtle); --nsu-petal:var(--nsu-accent-soft); color-scheme:dark;
+}
+/* 暖纸 / light */
+html[data-nsu-palette="garden"]:not([data-nsu-theme="dark"]) {
+  --nsu-bg:#f2f0eb; --nsu-surface:#faf8f2; --nsu-subtle:#eeece6; --nsu-text:#39362f; --nsu-muted:#625d52; --nsu-border:#ded8cd; --nsu-accent:#755939; --nsu-accent-soft:#ebe2d3; --nsu-hover:#f0eae0; --nsu-on-accent:#faf8f2; --nsu-water:var(--nsu-subtle); --nsu-petal:var(--nsu-accent-soft); color-scheme:light;
+}
+/* 暖纸 / dark */
+html[data-nsu-palette="garden"][data-nsu-theme="dark"] {
+  --nsu-bg:#24211e; --nsu-surface:#2e2b27; --nsu-subtle:#37332e; --nsu-text:#ebe7de; --nsu-muted:#bdb5a8; --nsu-border:#4b4339; --nsu-accent:#d2bb98; --nsu-accent-soft:#463c2e; --nsu-hover:#3d3630; --nsu-on-accent:#2d271f; --nsu-water:var(--nsu-subtle); --nsu-petal:var(--nsu-accent-soft); color-scheme:dark;
+}
+/* 冷灰 / light */
+html[data-nsu-palette="mist"]:not([data-nsu-theme="dark"]) {
+  --nsu-bg:#eef1f4; --nsu-surface:#f7f9fa; --nsu-subtle:#e9eef2; --nsu-text:#303b46; --nsu-muted:#586672; --nsu-border:#d8e0e7; --nsu-accent:#486680; --nsu-accent-soft:#dee8f1; --nsu-hover:#e6edf3; --nsu-on-accent:#f7f9fa; --nsu-water:var(--nsu-subtle); --nsu-petal:var(--nsu-accent-soft); color-scheme:light;
+}
+/* 冷灰 / dark */
+html[data-nsu-palette="mist"][data-nsu-theme="dark"] {
+  --nsu-bg:#1b2026; --nsu-surface:#252c34; --nsu-subtle:#2e3742; --nsu-text:#e5eaf0; --nsu-muted:#b1bdca; --nsu-border:#414c59; --nsu-accent:#afc8df; --nsu-accent-soft:#30445a; --nsu-hover:#323f4d; --nsu-on-accent:#222e3a; --nsu-water:var(--nsu-subtle); --nsu-petal:var(--nsu-accent-soft); color-scheme:dark;
+}
+/* 石墨 / light */
+html[data-nsu-palette="green"]:not([data-nsu-theme="dark"]) {
+  --nsu-bg:#f0f0f0; --nsu-surface:#f9f9f9; --nsu-subtle:#eaeaea; --nsu-text:#333333; --nsu-muted:#606060; --nsu-border:#d8d8d8; --nsu-accent:#4b4b4b; --nsu-accent-soft:#e0e0e0; --nsu-hover:#e8e8e8; --nsu-on-accent:#f9f9f9; --nsu-water:var(--nsu-subtle); --nsu-petal:var(--nsu-accent-soft); color-scheme:light;
+}
+/* 石墨 / dark */
+html[data-nsu-palette="green"][data-nsu-theme="dark"] {
+  --nsu-bg:#1e1e1e; --nsu-surface:#292929; --nsu-subtle:#323232; --nsu-text:#e4e4e4; --nsu-muted:#b7b7b7; --nsu-border:#484848; --nsu-accent:#c4c4c4; --nsu-accent-soft:#444444; --nsu-hover:#393939; --nsu-on-accent:#262626; --nsu-water:var(--nsu-subtle); --nsu-petal:var(--nsu-accent-soft); color-scheme:dark;
+}
+/* 柔和 / light */
+html[data-nsu-palette="soft"]:not([data-nsu-theme="dark"]) {
+  --nsu-bg:#f1f2f4; --nsu-surface:#f8f8f8; --nsu-subtle:#edeff2; --nsu-text:#2f343b; --nsu-muted:#5c6470; --nsu-border:#dce0e6; --nsu-accent:#52658b; --nsu-accent-soft:#e4e9f2; --nsu-hover:#e9edf3; --nsu-on-accent:#f8f8f8; --nsu-water:var(--nsu-subtle); --nsu-petal:var(--nsu-accent-soft); color-scheme:light;
+}
+/* 柔和 / dark */
+html[data-nsu-palette="soft"][data-nsu-theme="dark"] {
+  --nsu-bg:#1e2025; --nsu-surface:#282b32; --nsu-subtle:#30343c; --nsu-text:#e2e5eb; --nsu-muted:#b0b8c5; --nsu-border:#434954; --nsu-accent:#adbbdc; --nsu-accent-soft:#333d53; --nsu-hover:#333943; --nsu-on-accent:#202836; --nsu-water:var(--nsu-subtle); --nsu-petal:var(--nsu-accent-soft); color-scheme:dark;
+}

@@ -1,0 +1,49 @@
+/* SPDX-License-Identifier: Apache-2.0
+Copyright 2026 TipsY14 */
+/* Reversible visual trial. Remove this file from manifest content_scripts.css to revert.
+   No DOM changes, new colors, typography preference overrides, or native actions. */
+html[data-nsu-enabled] { --nsu-radius:8px; --nsu-shadow:0 6px 20px #00000018; }
+html[data-nsu-enabled] :is(.nsu-button,.nsu-header-button,.nsu-input,.nsu-feed-search,.nsu-select,.nsu-save-button,.new-discussion,.search-box input) { border-radius:6px!important; }
+html[data-nsu-enabled] :is(.category-list li a,.nsu-side-link) { border-radius:5px!important; }
+html[data-nsu-enabled] :is(.md-editor,.nsu-dialog,#nsu-context-panel) { border-radius:10px!important; }
+html[data-nsu-enabled] :is(.post-list-item .avatar-normal,.nsk-content-meta-info .avatar-normal,.user-head .avatar-normal) { border-radius:6px!important; }
+html[data-nsu-enabled] :is(.site-title,.nsk-post .post-title h1,.nsu-dialog-header h2) { letter-spacing:normal!important; }
+html[data-nsu-enabled] .site-title { font-weight:650; }
+/* Keep reading and list regions as continuous surfaces, not stacks of cards. */
+html[data-nsu-enabled] .post-list:not(.topic-carousel-panel) { border-left:0!important; border-right:0!important; border-radius:0!important; }
+html[data-nsu-enabled] .nsk-post { border:0!important; border-bottom:1px solid var(--nsu-border)!important; border-radius:0!important; }
+html[data-nsu-enabled] .comments { border:0!important; border-radius:0!important; }
+html[data-nsu-enabled] .comments .content-item { border:0!important; border-bottom:1px solid var(--nsu-border)!important; border-radius:0!important; margin-bottom:0!important; }
+html[data-nsu-enabled] .user-stat { background:transparent!important; border-radius:0!important; padding:8px 0!important; border-top:1px solid var(--nsu-border)!important; }
+html[data-nsu-enabled] .nsu-resume { background:transparent; border-bottom:1px solid var(--nsu-border); border-radius:0; padding:10px 0; }
+html[data-nsu-enabled] .nsu-level { background:transparent; padding:0; }
+html[data-nsu-enabled] .post-content blockquote { border-left-width:2px!important; border-radius:0; background:transparent!important; }
+html[data-nsu-enabled] .post-content pre { border-radius:6px; }
+/* Text already identifies these actions; keep icons in navigation and icon-only controls. */
+html[data-nsu-enabled] #nsu-reading-toolbar .nsu-button > svg { display:none; }
+
+/* Account statistics inherit the active surface, including native dark-layout overrides. */
+html[data-nsu-enabled] body #nsk-right-panel-container .user-card .user-stat,
+html[data-nsu-enabled] body #nsk-right-panel-container .user-stat .stat-block,
+html[data-nsu-enabled] body #nsk-right-panel-container .user-stat .stat-block > div {
+ background:transparent!important; box-shadow:none!important; border-radius:0!important;
+}
+html[data-nsu-enabled] #nsk-right-panel-container .user-stat { display:flex; gap:12px; }
+html[data-nsu-enabled] #nsk-right-panel-container .user-stat .stat-block { flex:1 1 0; min-width:0; width:auto; }
+html[data-nsu-enabled] #nsk-right-panel-container .user-stat a { display:flex; align-items:center; gap:5px; min-height:28px; font-family:inherit; font-size:12px; line-height:1.5; color:var(--nsu-muted)!important; }
+html[data-nsu-enabled] #nsk-right-panel-container .user-stat a svg { width:14px!important; height:14px!important; flex:0 0 14px; margin:0 2px 0 0!important; color:inherit; }
+/* Fixed icon column and common text baseline, no nested button tiles. */
+html[data-nsu-enabled] #nsk-right-panel-container .quick-access { padding:14px 16px!important; background:var(--nsu-surface)!important; }
+html[data-nsu-enabled] #nsk-right-panel-container .quick-access h4 { display:flex; align-items:center; gap:9px; margin:0 0 8px!important; font-family:inherit; font-size:12px!important; font-weight:600; line-height:20px; color:var(--nsu-muted)!important; }
+html[data-nsu-enabled] #nsk-right-panel-container .quick-access ul { margin:0!important; padding:0!important; }
+html[data-nsu-enabled] #nsk-right-panel-container .quick-access li { margin:0!important; padding:0!important; background:transparent!important; }
+html[data-nsu-enabled] #nsk-right-panel-container .quick-access li a { display:flex!important; align-items:center!important; gap:9px!important; min-height:34px; padding:6px 0!important; font-family:inherit!important; font-size:13px!important; line-height:22px!important; letter-spacing:normal!important; color:var(--nsu-text)!important; border-radius:0; }
+html[data-nsu-enabled] #nsk-right-panel-container .quick-access svg { display:block; width:16px!important; height:16px!important; flex:0 0 16px; margin:0!important; color:var(--nsu-muted); }
+html[data-nsu-enabled] #nsk-right-panel-container .quick-access a:hover { color:var(--nsu-accent)!important; background:transparent!important; }
+
+/* One full-width announcement surface; no tinted strip or contrasting row hover. */
+html[data-nsu-enabled] body .topic-carousel-wrapper { width:100%!important; box-sizing:border-box; background:var(--nsu-surface)!important; border:1px solid var(--nsu-border)!important; border-radius:6px; padding:0!important; }
+html[data-nsu-enabled] body .topic-carousel-wrapper .topic-carousel-panel,
+html[data-nsu-enabled] body .topic-carousel-wrapper .post-list-item,
+html[data-nsu-enabled] body .topic-carousel-wrapper .post-list-item:hover { background:transparent!important; box-shadow:none!important; border:0!important; }
+html[data-nsu-enabled] body .topic-carousel-wrapper .post-list-item { box-sizing:border-box; }

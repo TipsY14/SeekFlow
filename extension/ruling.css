@@ -1,0 +1,36 @@
+/* SPDX-License-Identifier: Apache-2.0
+Copyright 2026 TipsY14 */
+/* Public ruling records: native table and routes, local page filtering only. */
+html[data-nsu-enabled] .ruling-log { width:calc(100% - 56px)!important; max-width:1300px!important; margin:0 auto!important; color:var(--nsu-text)!important; min-width:0; }
+html[data-nsu-enabled] .ruling-log > div:not(.nsu-ruling-tools) { width:100%!important; max-width:none!important; margin:0!important; padding:0!important; }
+html[data-nsu-enabled] .nsu-ruling-tools { display:flex; gap:12px; flex-wrap:wrap; align-items:center; margin-bottom:12px; }
+html[data-nsu-enabled] .nsu-ruling-tools h1 { margin:0 auto 0 0; font-size:20px; font-weight:600; line-height:1.5; color:var(--nsu-text); }
+html[data-nsu-enabled] .nsu-ruling-filter { display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin:0; }
+html[data-nsu-enabled] .nsu-ruling-filter input { width:280px; max-width:100%; height:34px; font-size:13px; }
+html[data-nsu-enabled] .nsu-ruling-filter .nsu-button { min-height:34px; padding:6px 10px; }
+html[data-nsu-enabled] #nsu-ruling-status { color:var(--nsu-muted); font-size:12px; }
+html[data-nsu-enabled] .ruling-log .rulling-log-head { width:100%!important; display:flex; align-items:center; gap:12px; flex-wrap:wrap; margin:0!important; padding:0!important; color:var(--nsu-text)!important; }
+html[data-nsu-enabled] .ruling-log .nsk-pager { width:auto!important; padding:10px 0!important; text-align:left!important; }
+html[data-nsu-enabled] .ruling-log .nsk-pager :is(.pager-pos,.pager-prev,.pager-next) { display:inline-flex; align-items:center; justify-content:center; border-radius:5px!important; font-size:12px; line-height:20px; }
+html[data-nsu-enabled] .ruling-log table { display:block; width:100%!important; max-width:100%; overflow-x:auto; border-collapse:collapse; color:var(--nsu-text)!important; background:var(--nsu-surface)!important; border:1px solid var(--nsu-border)!important; border-radius:6px; box-shadow:none!important; font-size:13px; line-height:1.65; }
+html[data-nsu-enabled] .ruling-log :is(tr,th,td) { color:var(--nsu-text)!important; background:transparent!important; border-color:var(--nsu-border)!important; }
+html[data-nsu-enabled] .ruling-log :is(th,td) { padding:10px 12px!important; text-align:left!important; vertical-align:top!important; border:0!important; border-bottom:1px solid var(--nsu-border)!important; }
+html[data-nsu-enabled] .ruling-log th { font-size:12px; font-weight:600; background:var(--nsu-subtle)!important; color:var(--nsu-muted)!important; white-space:nowrap; }
+html[data-nsu-enabled] .ruling-log tbody tr:hover { background:var(--nsu-hover)!important; }
+html[data-nsu-enabled] .ruling-log td:nth-child(1) { white-space:nowrap; font-variant-numeric:tabular-nums; }
+html[data-nsu-enabled] .ruling-log td:nth-child(2) { min-width:130px; overflow-wrap:anywhere; }
+html[data-nsu-enabled] .ruling-log td:nth-child(3) { min-width:220px; white-space:pre-wrap!important; overflow-wrap:anywhere; }
+html[data-nsu-enabled] .ruling-log td:nth-child(4) { min-width:80px; }
+html[data-nsu-enabled] .ruling-log td:nth-child(5) { min-width:140px; font-size:12px; color:var(--nsu-muted)!important; font-variant-numeric:tabular-nums; }
+html[data-nsu-enabled] .ruling-log a { color:var(--nsu-accent)!important; text-decoration:none; }
+html[data-nsu-enabled] .ruling-log td a:hover { text-decoration:underline; }
+html[data-nsu-enabled] .ruling-log .nsu-ruling-filtered { display:none!important; }
+html[data-nsu-enabled] .ruling-log .pure-form input { max-width:100%; background:var(--nsu-subtle)!important; color:var(--nsu-text)!important; border:1px solid var(--nsu-border)!important; border-radius:5px!important; box-shadow:none!important; }
+html[data-nsu-enabled] .ruling-log .pure-button { color:var(--nsu-on-accent)!important; background:var(--nsu-accent)!important; border:0!important; border-radius:5px; font-size:13px; }
+@media(max-width:800px) {
+ html[data-nsu-enabled] .ruling-log { width:calc(100% - 28px)!important; }
+ html[data-nsu-enabled] .nsu-ruling-tools { gap:8px; }
+ html[data-nsu-enabled] .nsu-ruling-tools h1 { flex:1; }
+ html[data-nsu-enabled] .nsu-ruling-filter { order:3; width:100%; }
+ html[data-nsu-enabled] .nsu-ruling-filter input { flex:1; min-width:0; width:auto; }
+}

@@ -1,0 +1,18 @@
+/* SPDX-License-Identifier: Apache-2.0
+Copyright 2026 TipsY14 */
+import {test,expect} from '@playwright/test';
+const colors=()=>{const css=getComputedStyle(document.documentElement),result={};for(const key of ['hover','accent','muted','accent-soft','surface']){const n=document.createElement('i');n.style.color=css.getPropertyValue('--nsu-'+key);document.body.append(n);result[key]=getComputedStyle(n).color;n.remove();}return result;};
+for(const theme of ['light','dark'])for(const palette of ['waterlilies','garden','mist','green','soft'])test(`category hover ${palette} ${theme} without native fade`,async({page})=>{
+ await page.addInitScript(t=>localStorage.setItem('nsu.settings',JSON.stringify({theme:t.theme,palette:t.palette,infiniteFeed:false})),{theme,palette});await page.goto('/categories/daily');await page.locator('#nsu-header-actions').waitFor();
+ await page.evaluate(t=>{document.body.classList.remove('light-layout','dark-layout');document.body.classList.add(t==='light'?'dark-layout':'light-layout');document.querySelector('.category-list li').classList.add('current-category');},theme);
+ // Match the site's higher-specificity native hover and faded parent, loaded after extension CSS.
+ await page.addStyleTag({content:'#nsk-left-panel-container .category-list a:hover,#nsk-left-panel-container .category-list .current-category a{background:#f1f3f5;color:#0dbc79}.dark-layout #nsk-left-panel-container .category-list a:hover{background:rgba(0,0,0,.15)}#nsk-left-panel-container .category-list li:not(.current-category){opacity:.5;transition:opacity .3s}#nsk-left-panel-container .category-list li:hover:not(.current-category){opacity:1}#nsk-left-panel-container .category-list a svg{opacity:.8}#nsk-body-left .post-info .post-category:hover{background:green;color:white;box-shadow:0 0 8px green;text-shadow:0 0 2px green}.sorter a:hover{color:#0dbc79}'});
+ const normal=page.locator('.category-list li a[href="/categories/tech"]'),selected=page.locator('.category-list li a[href="/categories/daily"]');await expect(normal).toHaveAttribute('href','/categories/tech');
+ const c=await page.evaluate(colors);
+  await page.locator('.site-title').hover();await expect(normal).toHaveCSS('color',c.muted);await expect(normal.locator('..')).toHaveCSS('opacity','1');await normal.hover();await expect(normal).toHaveCSS('background-color',c.hover);await expect(normal).toHaveCSS('color',c.accent);await expect(normal.locator('svg')).toHaveCSS('color',c.accent);await expect(normal.locator('span')).toHaveCSS('color',c.accent);await expect(normal).toHaveCSS('box-shadow','none');await expect(normal).toHaveCSS('text-shadow','none');
+  await selected.hover();await expect(selected).toHaveCSS('background-color',c['accent-soft']);await expect(selected).toHaveCSS('color',c.accent);
+  const side=page.locator('.nsu-side-link').filter({hasText:'最近阅读'});await side.hover();await expect(side).toHaveCSS('background-color',c.hover);await expect(side).toHaveCSS('color',c.accent);
+  const badge=page.locator('.post-list:not(.topic-carousel-panel) .post-category').first();await badge.hover();await expect(badge).toHaveCSS('background-color',c['accent-soft']);await expect(badge).toHaveCSS('color',c.accent);await expect(badge).toHaveCSS('box-shadow','none');await expect(badge).toHaveCSS('text-shadow','none');
+ // Retain a single subtle keyboard indicator and the exact native link/action nodes.
+ await page.keyboard.press('Tab');await normal.focus();await expect(normal).toHaveCSS('outline-width','1px');await expect(normal).toHaveCSS('box-shadow','none');await page.evaluate(()=>window.__SEEKFLOW__.destroy());await normal.hover();await expect(normal).toHaveCSS('background-color',theme==='light'?'rgba(0, 0, 0, 0.15)':'rgb(241, 243, 245)');
+});

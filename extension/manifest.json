@@ -1,0 +1,51 @@
+{
+  "manifest_version": 3,
+  "name": "SeekFlow",
+  "version": "1.0.0",
+  "description": "更舒适的 NodeSeek：现代布局、评论上下文、阅读进度、稍后读与嵌套讨论。数据仅保存在本地。",
+  "permissions": [
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.nodeseek.com/*",
+        "https://nodeseek.com/*"
+      ],
+      "js": [
+        "main.js"
+      ],
+      "run_at": "document_idle",
+      "world": "MAIN"
+    },
+    {
+      "matches": [
+        "https://www.nodeseek.com/*",
+        "https://nodeseek.com/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "css": [
+        "palettes.css",
+        "styles.css",
+        "restrained.css",
+        "account-settings.css",
+        "space.css",
+        "ruling.css",
+        "theme-states.css",
+        "lucky.css"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "action": {
+    "default_title": "SeekFlow",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "16": "icons/16.png",
+    "48": "icons/48.png",
+    "128": "icons/128.png"
+  }
+}

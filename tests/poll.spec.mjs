@@ -1,0 +1,7 @@
+/* SPDX-License-Identifier: Apache-2.0
+Copyright 2026 TipsY14 */
+import {test,expect} from '@playwright/test';
+for(const theme of ['light','dark'])test(`embedded poll respects theme and narrow width ${theme}`,async({page})=>{
+ await page.setViewportSize({width:390,height:815});await page.goto('/post-100-1');await page.locator('#nsu-reading-toolbar').waitFor();await page.evaluate(t=>{document.documentElement.dataset.nsuTheme=t;const n=document.createElement('div');n.className='embed-vote';n.style.background='#383838';n.innerHTML='<form class="pure-form" style="background:#383838;width:560px"><h2>投票</h2><fieldset class="vote-stat-wrapper"><div class="vote-stat not-voted"><input type="radio" id="poll-test" name="vote-item"><label for="poll-test"><div class="vote-item-text">长选项文字用来检查移动端换行以及对齐长选项文字用来检查移动端换行</div></label></div></fieldset><fieldset class="op-buttons"><button class="pure-button" disabled>提交投票</button></fieldset></form>';document.querySelector('.post-content').append(n);window.pollSubmits=0;n.querySelector('form').onsubmit=e=>{e.preventDefault();window.pollSubmits++};},theme);
+ const poll=page.locator('.embed-vote');expect(await poll.evaluate(n=>n.scrollWidth<=n.clientWidth+1)).toBe(true);await page.locator('label[for="poll-test"]').click();await expect(page.locator('#poll-test')).toBeChecked();await expect(poll.locator('button')).toBeDisabled();expect(await page.evaluate(()=>window.pollSubmits)).toBe(0);expect(await poll.evaluate(n=>getComputedStyle(n).backgroundColor!=='rgb(56, 56, 56)')).toBe(true);
+});
