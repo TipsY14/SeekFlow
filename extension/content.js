@@ -18,6 +18,10 @@ Copyright 2026 TipsY14 */
     clock: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
     home: '<path d="m3 10 9-7 9 7M5 9v12h14V9M9 21v-7h6v7"/>',
     eye: '<path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12"/><circle cx="12" cy="12" r="3"/>',
+    user: '<circle cx="12" cy="7" r="4"/><path d="M5 21v-2a7 7 0 0 1 14 0v2"/>',
+    views: '<circle cx="12" cy="14" r="8"/><path d="M12 10v4l3 2M9 2h6M12 2v4M18 5l2 2"/>',
+    comments: '<path d="M4 3h14v11H9l-5 4V3M18 7h3v13l-5-3h-5"/>',
+    activity: '<path d="m13 2-9 12h7l-1 8 10-12h-7l1-8z"/>',
     reply: '<path d="m9 6-6 6 6 6M3 12h10c5 0 7 3 7 7"/>',
     link: '<path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0m2 1 1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0"/>',
     sun: '<circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1 1m12 12 1 1M5 19l1-1M18 6l1-1"/>',
@@ -1118,6 +1122,8 @@ Copyright 2026 TipsY14 */
       const originalLink = !isLink && q('a[href]', original);
       if (originalLink) { const target = safeURL(originalLink.getAttribute('href'), pageURL); const inner = el('a', '', text(originalLink)); if (target) inner.href = target.href; item.append(inner); }
       else item.textContent = text(original);
+      const glyph = { 'info-author': 'user', 'info-views': 'views', 'info-comments-count': 'comments', 'info-last-commenter': 'activity' }[cls];
+      if (glyph) item.prepend(icon(glyph), document.createTextNode(' '));
       info.append(item);
     }
     content.append(info); row.append(content); return row;
